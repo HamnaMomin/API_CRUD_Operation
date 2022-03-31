@@ -75,6 +75,7 @@ class StudentAPI(APIView):
     # authentication_classes = [JWTAuthentication] 
     # permission_classes = [IsAuthenticated]
 
+
     def get_object(self, pk):
         try:
             return Student.objects.get(pk=pk)
@@ -83,11 +84,11 @@ class StudentAPI(APIView):
 
     def get(self, request, pk=None, format=None):
         if pk is not None:
-            stud_obj = self.get_object(pk)
-            serializer = StudentSerializer(stud_obj)
+            student_obj = self.get_object(pk)
+            serializer = StudentSerializer(student_obj)  #get particular student detail using id
             return Response(serializer.data)
-        stud_obj = Student.objects.all()
-        serializer = StudentSerializer(stud_obj,many=True)
+        student_obj = Student.objects.all()     #provide all student detail 
+        serializer = StudentSerializer(student_obj,many=True)
         return Response(serializer.data)
 
 
@@ -110,9 +111,9 @@ class StudentAPI(APIView):
     def put(self, request,pk,format=None):
         try:
             id=pk
-            stud_obj = Student.objects.get(id=id)
+            student_obj = Student.objects.get(id=id)
             serializer = StudentSerializer(
-                stud_obj, data=request.data)
+                student_obj, data=request.data)
 
             if not serializer.is_valid():
                 print(serializer.errors)
@@ -129,9 +130,9 @@ class StudentAPI(APIView):
     def patch(self, request,pk,format=None):
         try:
             id=pk
-            stud_obj = Student.objects.get(id=id)
+            student_obj = Student.objects.get(id=id)
             serializer = StudentSerializer(
-                stud_obj, data=request.data,
+                student_obj, data=request.data,
                 partial=True)
 
             if not serializer.is_valid():
