@@ -18,11 +18,15 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
 
+# To show all student details
+
 
 def MyHome(request):
     student_details = Student.objects.all()
     context = {'student_details': student_details, }
     return render(request, 'home.html', context)
+
+# To register new user, access and refresh token also generated manually.
 
 
 class RegisterUser(APIView):
@@ -40,6 +44,8 @@ class RegisterUser(APIView):
 
         return Response({"status": 200, 'payload': serializer.data, 'refresh': str(refresh),
                          'access': str(refresh.access_token), "message": 'Your data is saved'})
+
+# for User login(JWT)
 
 
 class LoginUser(APIView):
@@ -59,6 +65,8 @@ class LoginUser(APIView):
         return Response({"message": "Login Success", 'refresh': str(refresh),
                          'access': str(refresh.access_token)})
 
+# for logging out user(JWT)
+
 
 class LogoutUser(APIView):
 
@@ -73,8 +81,8 @@ class LogoutUser(APIView):
 
 # Here Class based view is created
 class StudentAPI(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -143,7 +151,7 @@ class StudentAPI(APIView):
                 return Response({"status": 403, "errors": serializer.errors, "message": "Something went wrong"})
 
             serializer.save()
-            return Response({"status": 200, 'payload': serializer.data,  "message": "partial student data updated"})
+            return Response({"status": 200, 'payload': serializer.data,  "message": "Updated student data partially"})
 
         except Exception as e:
             print(e)
