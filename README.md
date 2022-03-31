@@ -22,6 +22,6 @@ python manage.py runserver
 Optional-home page is added to show all student data
 
 Optional Step-Uncomment below 2 line in views.py firl for applying JWT authentication
-# authentication_classes = [JWTAuthentication]
-# permission_classes = [IsAuthenticated]
+authentication_classes = [JWTAuthentication]
+permission_classes = [IsAuthenticated]
 
