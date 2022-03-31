@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* .mytable {
+            border: 1px solid rgb(22, 22, 22);
+            border-collapse: collapse;
+            text-align: left;
+
+            padding: 2px;
+            height: 70%;
+            width: 50%;
+            table-layout: auto;
+            align-content: center;
+            background-color: aquamarine;
+        } */
+        table,
+        td,
+        th {
+            border: 2px solid rgb(12, 12, 12);
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th,
+        td {
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Data</h1>
+    <!-- Render student data -->
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Father Name</th>
+        </thead>
+
+        {% for student in student_details %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.fatherName }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
